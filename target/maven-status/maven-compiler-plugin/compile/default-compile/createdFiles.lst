@@ -1,0 +1,8 @@
+de\kozdemir\bibliothek\service\BookService.class
+de\kozdemir\bibliothek\model\Genera.class
+de\kozdemir\bibliothek\model\Book.class
+de\kozdemir\bibliothek\model\Book$BookBuilder.class
+de\kozdemir\bibliothek\BibliothekApplication.class
+de\kozdemir\bibliothek\controller\BookController.class
+de\kozdemir\bibliothek\model\Status.class
+de\kozdemir\bibliothek\repository\BookRepository.class
