@@ -1,6 +1,7 @@
 package de.kozdemir.bibliothek.controller;
 
 import de.kozdemir.bibliothek.model.Book;
+import de.kozdemir.bibliothek.model.Genera;
 import de.kozdemir.bibliothek.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,24 +26,54 @@ public class BookController {
         return bookService.findById(id);
     }
 
-    @GetMapping("search")
-    public List<Book> searchByTitle(@RequestBody Book book) {
-        System.out.println("T:"+book.getTitle());
-        System.out.println("A:"+book.getAuthor());
-        System.out.println("G:"+book.getGenera());
-        return bookService.searchByTitle(book.getTitle());
-    }
+    /*
+    @GetMapping("search/{book}")
+    public List<Book> searchBook(@RequestParam("book") Book book) {
+        System.out.println(book.getTitle());
+        System.out.println(book.getAuthor());
+        System.out.println(book.getGenera());
 
-    @GetMapping("search/{genera}")
-    public Optional<Book> searchByGenera(@PathVariable("genera") String genera) {
-        return bookService.searchByGenera(genera);
+        return bookService.searchBook(book);
+    }
+    */
+
+/*
+    @GetMapping("search/{title}")
+    public List<Book> searchByTitle(@PathVariable String title) {
+        return bookService.searchByTitle(title);
     }
 
     @GetMapping("search/{author}")
-    public Optional<Book> searchByAuthor(@PathVariable("author") String author) {
+    public List<Book> searchByAuthor(@PathVariable("author") String author) {
         return bookService.searchByAuthor(author);
     }
 
+    @GetMapping("search/{genera}")
+    public List<Book> searchByGenera(@PathVariable("genera") Genera genera) {
+        return bookService.searchByGenera(genera);
+    }
+*/
+
+    @GetMapping("st")
+    public List<Book> searchByTitle(@RequestParam("title") String title) {
+        return bookService.searchByTitle(title);
+    }
+
+    @GetMapping("sa")
+    public List<Book> searchByAuthor(@RequestParam("author") String author) {
+        return bookService.searchByAuthor(author);
+    }
+
+    @GetMapping("sg")
+    public List<Book> searchByGenera(@RequestParam("genera") Genera genera) {
+        return bookService.searchByGenera(genera);
+    }
+
+    //mit title oder Author search
+    @GetMapping("search")
+    public List<Book> searchByTitleAuthor(@RequestParam("title") String title, @RequestParam("author") String author) {
+        return bookService.searchByTitleAndAuthor(title, author);
+    }
 
 
     @PostMapping("") // Speichern (INSERT)
@@ -52,7 +83,7 @@ public class BookController {
 
     @PutMapping("{id}") // Speichern (UPDATE)
     public Book update(@PathVariable("id") Long id, @RequestBody Book book) {
-       return bookService.update(id, book);
+        return bookService.update(id, book);
     }
 
     @DeleteMapping("{id}") // Löschen

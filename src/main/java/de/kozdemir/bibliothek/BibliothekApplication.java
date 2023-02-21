@@ -53,6 +53,27 @@ public class BibliothekApplication implements CommandLineRunner {
             book.setGenera(Genera.ENZYKLOPÄDIE);
             book.setStatus(Status.AVAILABLE);
             bookList.add(book);
+
+            book = new Book();
+            book.setTitle("Bygladyar");
+            book.setDescription("bala bla bla...... ");
+            book.setAuthor("Tom Cruse");
+            book.setIsbn("8997-4545-5555");
+            book.setRentDate(null);
+            book.setGenera(Genera.ENZYKLOPÄDIE);
+            book.setStatus(Status.AVAILABLE);
+            bookList.add(book);
+
+            book = new Book();
+            book.setTitle("aaaaaaa");
+            book.setDescription("Fantastisch....");
+            book.setAuthor("J.K. Rowling");
+            book.setIsbn("3456-2567-7643");
+            book.setRentDate(LocalDateTime.of(2023, 02, 10, 11, 35));
+            book.setGenera(Genera.ROMANE);
+            book.setStatus(Status.RENTED);
+            bookList.add(book);
+
             bookRepository.saveAll(bookList); // Speichert den Inhalt der Liste
         }
     }

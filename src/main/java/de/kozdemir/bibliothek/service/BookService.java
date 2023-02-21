@@ -1,6 +1,7 @@
 package de.kozdemir.bibliothek.service;
 
 import de.kozdemir.bibliothek.model.Book;
+import de.kozdemir.bibliothek.model.Genera;
 import de.kozdemir.bibliothek.model.Status;
 import de.kozdemir.bibliothek.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,28 +23,34 @@ public class BookService {
     }
 
     public List<Book> findAll() {
-        statusControlAndChangeBook(bookRepository.findAll()); // Status von allen Medien wird kontrolliert
+        statusControlAndChangeBook(bookRepository.findAll());
         return bookRepository.findAll();
     }
 
     public Optional<Book> findById(Long id) {
-        statusControlAndChangeBook(bookRepository.findById(id).get()); //Status von Media wird kontrolliert
+//        statusControlAndChangeBook(bookRepository.findById(id).get());
         return bookRepository.findById(id);
     }
 
     public List<Book> searchByTitle(String title) {
 //        statusControlAndChangeBook(bookRepository.searchTitle(title).get());
+        return bookRepository.findByTitleContains(title);
+    }
 
-        return bookRepository.searchTitle(title);
-    }
-    public Optional<Book> searchByGenera(String genera) {
-//        statusControlAndChangeBook(bookRepository.searchGenera(genera).get());
-        return bookRepository.searchGenera(genera);
-    }
-    public Optional<Book> searchByAuthor(String author) {
+    public List<Book> searchByAuthor(String author) {
 //        statusControlAndChangeBook(bookRepository.searchAuthor(author).get());
-        return bookRepository.searchAuthor(author);
+        return bookRepository.findByAuthorContains(author);
     }
+
+    public List<Book> searchByGenera(Genera genera) {
+        return bookRepository.findByGenera(genera);
+    }
+
+    public List<Book> searchByTitleAndAuthor(String title, String author) {
+        return bookRepository.findByTitleContainsAndAuthorContains(title, author);
+    }
+
+
 
     public Book insert(Book book) {
         return bookRepository.save(book);
