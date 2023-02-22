@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -12,10 +13,10 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-//@ToString
+@ToString
 //@EqualsAndHashCode
 @Builder
-//@Table(name = "books")
+@Table(name = "books")
 public class Book implements Serializable {
 
     @Id
@@ -23,27 +24,22 @@ public class Book implements Serializable {
     @Column(name = "BOOK_ID")
     private long id;
 
-//    @Size(min = 2, max = 100)
+    @NotEmpty(message = "Title is not empty.")
     @Column(name = "TITLE")
     private String title;
 
-//    @Size(min = 2, max = 1000)
     @Column(name = "DESCRIPTION")
     private String description;
 
-//    @Size(min = 2, max = 100)
     @Column(name = "AUTHOR")
     private String author;
 
-//    @Size(min = 2, max = 25)
     @Column(name = "ISBN")
     private String isbn;
-
 
     @Enumerated(EnumType.STRING)
     @Column(name = "GENERA")
     private Genera genera;
-
 
     @Enumerated(EnumType.STRING)
     @Column(name = "STATUS")

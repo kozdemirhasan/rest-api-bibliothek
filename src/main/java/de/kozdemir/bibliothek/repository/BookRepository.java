@@ -15,14 +15,10 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Query("SELECT b FROM Book b WHERE lower(b.title) LIKE %?1%")
     List<Book> search(Book book);
 
-
-    List<Book> findByTitleContains(String title);
-    List<Book> findByAuthorContains(String author);
-    List<Book> findByGenera(Genera genera);
-
-    List<Book> findByTitleContainsAndAuthorContains(String title, String author);
-
-
+    List<Book> findByTitleContainsIgnoreCase(String title);
+    List<Book> findByAuthorContainsIgnoreCase(String author);
+    List<Book> findByGenera(Genera genera); // Enum
+    List<Book> findByTitleContainsIgnoreCaseAndAuthorContainsIgnoreCase(String title, String author);
     List<Book> findByStatusAndRentDateBefore(Status status, LocalDateTime rentDate);
 
 //    void changeStatusAtBefore(LocalDateTime minusDays);

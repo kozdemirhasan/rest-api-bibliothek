@@ -19,13 +19,12 @@ public class StatusService {
     private BookRepository bookRepository;
 
     //@Scheduled(cron = "@hourly") // @yearly, @daily, @midnight, @hourly
-    @Scheduled(cron = "0 0/2 * * * ?") // alle 2 minuten einführen
+    @Scheduled(cron = "@midnight") // jede Mitternacht kontrolliert
     public void changeStatus() {
         List<Book> books = bookRepository.findByStatusAndRentDateBefore(Status.RENTED, LocalDateTime.now().minusDays(7));
         for (Book b : books)
             b.setStatus(Status.DELAYED);
 
-        System.out.println("*** Status Control System ***");
         bookRepository.saveAll(books);
     }
 }

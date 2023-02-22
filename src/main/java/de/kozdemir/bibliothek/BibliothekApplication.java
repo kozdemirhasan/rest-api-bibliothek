@@ -56,7 +56,7 @@ public class BibliothekApplication implements CommandLineRunner {
 
             book = new Book();
             book.setTitle("Bygladyar");
-            book.setDescription("bala bla bla...... ");
+            book.setDescription("Das ist das...... ");
             book.setAuthor("Tom Cruse");
             book.setIsbn("8997-4545-5555");
             book.setRentDate(null);
@@ -66,10 +66,10 @@ public class BibliothekApplication implements CommandLineRunner {
 
             book = new Book();
             book.setTitle("aaaaaaa");
-            book.setDescription("Fantastisch....");
+            book.setDescription("Super...");
             book.setAuthor("J.K. Rowling");
             book.setIsbn("3456-2567-7643");
-            book.setRentDate(LocalDateTime.of(2023, 02, 10, 11, 35));
+            book.setRentDate(LocalDateTime.of(2023, 02, 18, 11, 35));
             book.setGenera(Genera.ROMANE);
             book.setStatus(Status.RENTED);
             bookList.add(book);

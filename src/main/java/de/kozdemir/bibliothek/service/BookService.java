@@ -23,23 +23,20 @@ public class BookService {
     }
 
     public List<Book> findAll() {
-        statusControlAndChangeBook(bookRepository.findAll());
         return bookRepository.findAll();
     }
 
     public Optional<Book> findById(Long id) {
-//        statusControlAndChangeBook(bookRepository.findById(id).get());
+        statusControlAndChange(bookRepository.findById(id).get()); // ob Available des Buches geprüft wird
         return bookRepository.findById(id);
     }
 
     public List<Book> searchByTitle(String title) {
-//        statusControlAndChangeBook(bookRepository.searchTitle(title).get());
-        return bookRepository.findByTitleContains(title);
+        return bookRepository.findByTitleContainsIgnoreCase(title);
     }
 
     public List<Book> searchByAuthor(String author) {
-//        statusControlAndChangeBook(bookRepository.searchAuthor(author).get());
-        return bookRepository.findByAuthorContains(author);
+        return bookRepository.findByAuthorContainsIgnoreCase(author);
     }
 
     public List<Book> searchByGenera(Genera genera) {
@@ -47,17 +44,15 @@ public class BookService {
     }
 
     public List<Book> searchByTitleAndAuthor(String title, String author) {
-        return bookRepository.findByTitleContainsAndAuthorContains(title, author);
+        return bookRepository.findByTitleContainsIgnoreCaseAndAuthorContainsIgnoreCase(title, author);
     }
-
-
 
     public Book insert(Book book) {
         return bookRepository.save(book);
     }
 
     public Book update(Long id, Book book) {
-        statusControlAndChangeBook(findById(id).get());
+        statusControlAndChange(findById(id).get());
         Optional<Book> opt = bookRepository.findById(id);
 
         if (opt.isPresent()) {
@@ -79,13 +74,16 @@ public class BookService {
         bookRepository.deleteById(id);
     }
 
-    public void statusControlAndChangeBook(List<Book> books) {
+    //Alle Bücher werden kontrolliert
+    /*
+    public void statusControlAndChange(List<Book> books) {
         for (Book m : books) {
-            statusControlAndChangeBook(m);
+            statusControlAndChange(m);
         }
     }
+    */
 
-    public void statusControlAndChangeBook(Book book) {
+    public void statusControlAndChange(Book book) {
         if ((book.getStatus() == Status.RENTED) && (book.getRentDate().plusDays(7).isBefore(LocalDateTime.now()))) {
             book.setStatus(Status.DELAYED);
             bookRepository.save(book);
