@@ -12,9 +12,6 @@ import java.util.Optional;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-    @Query("SELECT b FROM Book b WHERE lower(b.title) LIKE %?1%")
-    List<Book> search(Book book);
-
     List<Book> findByTitleContainsIgnoreCase(String title);
     List<Book> findByAuthorContainsIgnoreCase(String author);
     List<Book> findByGenera(Genera genera); // Enum

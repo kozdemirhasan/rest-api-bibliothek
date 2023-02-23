@@ -74,11 +74,11 @@ public class BookService {
         bookRepository.deleteById(id);
     }
 
-    //Alle Bücher werden kontrolliert
+    //Status von alle Bücher  werden kontrolliert, wenn alle Bücher ausruft werden
     /*
     public void statusControlAndChange(List<Book> books) {
         for (Book m : books) {
-            statusControlAndChange(m);
+                statusControlAndChange(m);
         }
     }
     */

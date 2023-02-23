@@ -81,7 +81,6 @@ public class BookController {
         return bookService.searchByTitleAndAuthor(title, author);
     }
 
-
     @PostMapping("add") // Speichern (INSERT)
     public Book insert(@Valid @RequestBody Book book, BindingResult result, Model model) {
         return bookService.insert(book);

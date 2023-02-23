@@ -1,6 +1,6 @@
 package de.kozdemir.bibliothek.model;
 
 public enum Status {
-    AVAILABLE, RENTED, DELAYED, DELETED;
+    AVAILABLE, RENTED, DELAYED;
 }
 
