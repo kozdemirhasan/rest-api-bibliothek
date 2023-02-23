@@ -36,8 +36,8 @@ public class BibliothekApplication implements CommandLineRunner {
 
             Book book = new Book();
             book.setTitle("Harry Potter");
-            book.setDescription("Fantastisch....");
-            book.setAuthor("J.K. Rowling");
+            book.setDescription("Fantastisch und Abenteuer");
+            book.setAuthor("Joanne K. Rowling");
             book.setIsbn("3456-2567-7643");
             book.setRentDate(LocalDateTime.of(2023, 02, 10, 11, 35));
             book.setGenera(Genera.ROMANE);
@@ -47,7 +47,7 @@ public class BibliothekApplication implements CommandLineRunner {
             book = new Book();
             book.setTitle("Gladyator");
             book.setDescription("bala bla bla...... ");
-            book.setAuthor("Tom Cruse");
+            book.setAuthor("Tom Crusste");
             book.setIsbn("8997-4545-5555");
             book.setRentDate(null);
             book.setGenera(Genera.ENZYKLOPÄDIE);
@@ -55,19 +55,19 @@ public class BibliothekApplication implements CommandLineRunner {
             bookList.add(book);
 
             book = new Book();
-            book.setTitle("Bygladyar");
+            book.setTitle("Suc ve Ceza");
             book.setDescription("Das ist das...... ");
             book.setAuthor("Tom Cruse");
             book.setIsbn("8997-4545-5555");
             book.setRentDate(null);
-            book.setGenera(Genera.ENZYKLOPÄDIE);
+            book.setGenera(Genera.ROMANE);
             book.setStatus(Status.AVAILABLE);
             bookList.add(book);
 
             book = new Book();
-            book.setTitle("aaaaaaa");
-            book.setDescription("Super...");
-            book.setAuthor("J.K. Rowling");
+            book.setTitle("Spring Boot in Action");
+            book.setDescription("Für Anfänger Spring Boot.");
+            book.setAuthor("Craing Walls");
             book.setIsbn("3456-2567-7643");
             book.setRentDate(LocalDateTime.of(2023, 02, 18, 11, 35));
             book.setGenera(Genera.ROMANE);

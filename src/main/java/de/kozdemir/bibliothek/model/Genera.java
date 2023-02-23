@@ -1,5 +1,5 @@
 package de.kozdemir.bibliothek.model;
 
 public enum Genera {
-    ROMANE, HISTORIE, SCIENCE_FICTION, ENZYKLOPÄDIE, MAGAZIN;
+    ROMANE, HISTORIE, SCIENCE_FICTION, ENZYKLOPÄDIE, MAGAZIN, OTHER;
 }
