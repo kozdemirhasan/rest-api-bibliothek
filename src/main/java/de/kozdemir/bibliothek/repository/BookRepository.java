@@ -13,23 +13,17 @@ import java.util.Optional;
 public interface BookRepository extends JpaRepository<Book, Long> {
 
     List<Book> findByTitleContainsIgnoreCase(String title);
+
     List<Book> findByAuthorContainsIgnoreCase(String author);
+
     List<Book> findByGenera(Genera genera); // Enum
+
+    List<Book> findByStatus(Status status); // Enum
+
     List<Book> findByTitleContainsIgnoreCaseAndAuthorContainsIgnoreCase(String title, String author);
+
     List<Book> findByStatusAndRentDateBefore(Status status, LocalDateTime rentDate);
 
-//    void changeStatusAtBefore(LocalDateTime minusDays);
-
-    /*
-    @Query("SELECT b FROM Book b WHERE lower(b.title) LIKE %?1%")
-    List<Book> searchTitle(String title);
-
-    @Query("SELECT b FROM Book b WHERE lower(b.genera) LIKE %?1%")
-    Optional<Book> searchGenera(String genera);
-
-    @Query("SELECT b FROM Book b WHERE lower(b.author) LIKE %?1%")
-    Optional<Book> searchAuthor(String author);
-    */
 
 
 }

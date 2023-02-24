@@ -36,7 +36,7 @@ public class BibliothekApplication implements CommandLineRunner {
 
             Book book = new Book();
             book.setTitle("Harry Potter");
-            book.setDescription("Fantastisch und Abenteuer");
+            book.setDescription("Fantastisch und Abenteuerlich");
             book.setAuthor("Joanne K. Rowling");
             book.setIsbn("3456-2567-7643");
             book.setRentDate(LocalDateTime.of(2023, 02, 10, 11, 35));

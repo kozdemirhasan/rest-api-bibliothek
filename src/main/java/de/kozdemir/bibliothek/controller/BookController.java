@@ -32,34 +32,6 @@ public class BookController {
         return bookService.findById(id);
     }
 
-    /*
-    @GetMapping("search/{book}")
-    public List<Book> searchBook(@RequestParam("book") Book book) {
-        System.out.println(book.getTitle());
-        System.out.println(book.getAuthor());
-        System.out.println(book.getGenera());
-
-        return bookService.searchBook(book);
-    }
-    */
-
-/*
-    @GetMapping("search/{title}")
-    public List<Book> searchByTitle(@PathVariable String title) {
-        return bookService.searchByTitle(title);
-    }
-
-    @GetMapping("search/{author}")
-    public List<Book> searchByAuthor(@PathVariable("author") String author) {
-        return bookService.searchByAuthor(author);
-    }
-
-    @GetMapping("search/{genera}")
-    public List<Book> searchByGenera(@PathVariable("genera") Genera genera) {
-        return bookService.searchByGenera(genera);
-    }
-*/
-
     @GetMapping("find/title/{title}")
     public List<Book> searchByTitle(@PathVariable("title") String title) {
         return bookService.searchByTitle(title);
@@ -73,6 +45,11 @@ public class BookController {
     @GetMapping("find/genera/{genera}")
     public List<Book> searchByGenera(@PathVariable("genera") Genera genera) {
         return bookService.searchByGenera(genera);
+    }
+
+    @GetMapping("find/status/{status}")
+    public List<Book> searchByStatus(@PathVariable("status") Status status) {
+        return bookService.searchByStatus(status);
     }
 
     //mit Title und Author search (@RequestParam)
@@ -98,31 +75,33 @@ public class BookController {
 
     //leihen
     @PutMapping("rent/{id}")
-    public Book rent(@PathVariable("id") Long id, Model model) throws RuntimeException {
-        Book b = bookService.findById(id).get();
-        if (b.equals(null)) {
-            model.addAttribute("error", "Book is not find");
-        } else if (!b.getStatus().equals(Status.AVAILABLE)) {
-            model.addAttribute("available", false);
-            throw new RuntimeException("Book is not lending");
-        } else {
-            b.setStatus(Status.RENTED);
-            b.setRentDate(LocalDateTime.now());
-            return bookService.update(id, b);
-        }
+    public Book rent(@PathVariable("id") Long id, Model model) {
+        try {
+            Book b = bookService.findById(id).get();
 
-        throw new RuntimeException("Book nicht gefunden.");
+            if (!b.getStatus().equals(Status.AVAILABLE)) {
+                model.addAttribute("available", false);
+                throw new RuntimeException("Buch ist nicht verfügbar");
+            } else {
+                b.setStatus(Status.RENTED);
+                b.setRentDate(LocalDateTime.now());
+                return bookService.update(id, b);
+            }
+
+        } catch (NoSuchElementException e) {
+            throw new RuntimeException("Buch nicht gefunden.");
+        }
     }
 
     //zurückzugeben
     @PutMapping("giveback/{id}")
-    public Book giveBack(@PathVariable Long id, Model model) {
-        Book b = null;
+    public Book giveBack(@Valid @PathVariable Long id, Model model) {
+        Book b;
         try {
             b = bookService.findById(id).get();
         } catch (NoSuchElementException e) {
-            System.out.println("Fehler...");
             model.addAttribute("error", true);
+            throw new RuntimeException("Buch nicht gefunden.");
         }
 
         if (b.getStatus().equals(Status.RENTED) || b.getStatus().equals(Status.DELAYED)) {
@@ -131,7 +110,7 @@ public class BookController {
             return bookService.update(id, b);
         }
 
-        throw new RuntimeException("Book nicht gefunden.");
+        throw new RuntimeException("ungültige Abfrage");
     }
 
 }

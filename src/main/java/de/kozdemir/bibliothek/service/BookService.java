@@ -23,6 +23,7 @@ public class BookService {
     }
 
     public List<Book> findAll() {
+        statusControlAndChange(bookRepository.findAll()); // Der Status aller Bücher wird überprüft.
         return bookRepository.findAll();
     }
 
@@ -31,7 +32,7 @@ public class BookService {
         return bookRepository.findById(id);
     }
 
-    public List<Book> searchByTitle(String title) {
+    public List<Book> searchByTitle(String title){
         return bookRepository.findByTitleContainsIgnoreCase(title);
     }
 
@@ -41,6 +42,9 @@ public class BookService {
 
     public List<Book> searchByGenera(Genera genera) {
         return bookRepository.findByGenera(genera);
+    }
+    public List<Book> searchByStatus(Status status) {
+        return bookRepository.findByStatus(status);
     }
 
     public List<Book> searchByTitleAndAuthor(String title, String author) {
@@ -75,13 +79,11 @@ public class BookService {
     }
 
     //Status von alle Bücher  werden kontrolliert, wenn alle Bücher ausruft werden
-    /*
     public void statusControlAndChange(List<Book> books) {
         for (Book m : books) {
                 statusControlAndChange(m);
         }
     }
-    */
 
     public void statusControlAndChange(Book book) {
         if ((book.getStatus() == Status.RENTED) && (book.getRentDate().plusDays(7).isBefore(LocalDateTime.now()))) {
@@ -89,6 +91,5 @@ public class BookService {
             bookRepository.save(book);
         }
     }
-
 
 }

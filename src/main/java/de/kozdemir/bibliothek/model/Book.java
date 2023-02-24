@@ -2,6 +2,7 @@ package de.kozdemir.bibliothek.model;
 
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
